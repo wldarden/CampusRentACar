@@ -1,0 +1,46 @@
+@CHARSET "ISO-8859-1";
+/* body means everything inside browser. */
+/* Since content is centered, specify style in wrapper */ 
+
+body { 
+	/*background-color: #3F2860;*/
+	background-color: #9BC1C2;
+} 
+
+
+#header{
+	/*background-color: #9BC1C2;*/
+	display: block;
+	text-align: center;
+
+}
+#footer{
+	/*background-color: #9BC1C2;*/	
+	display: block;
+	text-align: center;
+	padding-top: 60px;
+
+}
+#wrapper {
+	margin: 0 auto;
+    width: 80%;
+	background-color: #F5F5F5;
+	color: #3F2860;
+	font-family: 'verdana','arial';	
+	
+}
+/* Style for the h1 */
+#h1Wrapper { 
+	line-height: 200%;   /* control height (top bottom space)*/
+	padding-left: 20px;  /*give 20px padding to only left*/
+}
+
+#main {
+	width: 80%;
+	margin:auto;
+}
+
+#horizontalLinks{
+	text-align: right;
+	margin-right:20px;
+}
