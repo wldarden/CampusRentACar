@@ -2,10 +2,10 @@
 
 <title>Register</title>
 <div id="horizontalLinks">
-<a href="/company_management/SystemUserController?action=showAllSystemUsersProfile">All System Users Profile</a>
-<a href="/company_management/AdminRevokeRenter.jsp">Revoke</a>
-<a href="/company_management/EditProfile.jsp">Edit My Profile</a>
-<a href="Logout">Logout</a>
+<a href="/CampusRentACar/SystemUserController?action=showAllSystemUsersProfile">All System Users Profile</a>
+<a href="/CampusRentACar/AdminRevokeRenter.jsp">Revoke</a>
+<a href="/CampusRentACar/EditProfile.jsp">Edit My Profile</a>
+<a href="/CampusRentACar/Logout.jsp">Logout</a>
 </div>
 
 <div id="main">

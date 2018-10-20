@@ -14,10 +14,10 @@ table, th, td {
 
 <title>Admin HomePage</title>
 <div id="horizontalLinks">
-<a href="/company_management/SystemUserController?action=showAllSystemUsersProfile">All System Users Profile</a>
-<a href="/company_management/AdminRevokeRenter.jsp">Revoke</a>
-<a href="/company_management/EditProfile.jsp">Edit My Profile</a>
-<a href="Logout">Logout</a>
+<a href="/CampusRentACar/AdminController?action=showAllSystemUsersProfile">All System Users Profile</a>
+<a href="/CampusRentACar/AdminRevokeRenter.jsp">Revoke</a>
+<a href="/CampusRentACar/EditProfile.jsp">Edit My Profile</a>
+<a href="/CampusRentACar/Logout.jsp">Logout</a>
 </div>
 
 <div id="main">
@@ -28,7 +28,7 @@ Select a system user's profile you would like to edit, and click edit
 <br>
 
 <br></p>
-<form name="Edit" action="/company_management/SystemUserController?action=edit" method="post" >
+<form name="Edit" action="/CampusRentACar/AdminController?action=edit" method="post" >
  <table> 
 <tr> 
 <th>Select a system user</th>

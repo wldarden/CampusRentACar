@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel = "stylesheet" type="text/css" href = "/company_management/style.css" />
+<!-- <link rel = "stylesheet" type="text/css" href = "/CampusRentACar/style.css" /> -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/style.css" />
 
 </head>
 <body>
 <div id="wrapper">
 <div id="header">
 <h1 id="h1Wrapper">Welcome to Campus Rent A Car</h1>
-We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM-8PM, Sa 8AM-5PM, Su Noon-5PM.
+We offer car rental services to UTA students and faculties. 
+Store Hours: M-F 8AM-8PM, Sa 8AM-5PM, Su Noon-5PM.
 <hr>
 </div>
