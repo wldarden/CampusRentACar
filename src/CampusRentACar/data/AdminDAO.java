@@ -84,7 +84,7 @@ public class AdminDAO {
 				String email  = systemUserList.getString("email");
 				String address  = systemUserList.getString("address");				 
 				String dob  = systemUserList.getString("dob");
-				//String auto_club_member = systemUserList.getString("auto_club_member");
+				int auto_club_member = systemUserList.getInt("auto_club_member");
 
 				user.setUta_id(uta_id);
 				user.setRole(role);
@@ -95,8 +95,7 @@ public class AdminDAO {
 				user.setEmail(email);
 				user.setAddress(address);
 				user.setDob(dob);
-				//System.out.println("uta_id =" + uta_id);
-				//user.setAuto_club_member(auto_club_member);
+				user.setAuto_club_member(auto_club_member);
 				systemUsersListInDB.add(user);	 				
 			} 
 			return systemUsersListInDB;
@@ -133,4 +132,9 @@ public class AdminDAO {
 				e.printStackTrace();
 			}};
 	}
+	
 }
+
+
+
+
