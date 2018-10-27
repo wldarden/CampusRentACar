@@ -37,6 +37,20 @@ public class SystemUserErrorMsgs {
 			!dobError.equals(""))
 			errorMsg="Please correct the following errors";
 	}
+	
+	public void setEditErrorMsg() {
+		if (!uta_idError.equals("") || !passwordError.equals("") ||
+			!nameError.equals("") || !phoneError.equals("") || !emailError.equals("") || !addressError.equals("") ||
+			!dobError.equals(""))
+			errorMsg="Please correct the following errors";
+	}	
+
+	public void setNotInDBErrorMsg(){
+		if ( !user_nameError.equals(""))
+			errorMsg="Please correct the following errors";
+	}
+	
+	
 	public String getUta_idError() {
 		return uta_idError;
 	}

@@ -106,48 +106,96 @@ public class SystemUser implements Serializable {
 		errorMsgs.setDobError(validateDob(systemUser.getDob()));
 		errorMsgs.setErrorMsg();			
 	}
+	
+	public void validateEditSystemUser (SystemUser systemUser, SystemUserErrorMsgs errorMsgs) {
+		errorMsgs.setUta_idError(validateUta_id(systemUser.getUta_id()));
+		//errorMsgs.setUser_nameError(validateUser_name(systemUser.getUser_name()));
+		errorMsgs.setPasswordError(validatePassword(systemUser.getPassword()));
+		errorMsgs.setNameError(validateName(systemUser.getName()));
+		errorMsgs.setPhoneError(validatePhone(systemUser.getPhone()));
+		errorMsgs.setEmailError(validateEmail(systemUser.getEmail()));
+		errorMsgs.setAddressError(validateAddress(systemUser.getAddress()));
+		errorMsgs.setDobError(validateDob(systemUser.getDob()));
+		errorMsgs.setEditErrorMsg();			
+	}
+	
+	public void validateUserNameInSystemUser (SystemUser systemUser, SystemUserErrorMsgs errorMsgs) {
+		errorMsgs.setUser_nameError(validateUser_nameINDB(systemUser.getUser_name()));
+		errorMsgs.setNotInDBErrorMsg();
+	}
 	private String validateUta_id (String uta_id) {
 		String result="";
-		if (!stringSize(uta_id,3,16))
-			result= "Your UTA Id must between 3 and 16 digits";
-		else {
-			if (!isTextAnInteger(uta_id))
-				result="Your SystemUser ID must be a number";
-			//else
-				//if (!SystemUserDAO.uniqueEmpID(uta_idError))
-					//result="SystemUser ID already in database";
+		if (!stringSize(uta_id,10,10))
+			result= "Your UTA ID must be 10 digits long";
+		else if (!isTextAnInteger(uta_id)) {
+				result="Your UTA ID ID must be a number";
 		}
 		return result;				
 	}
+	//user name should not exist in DB
 	private String validateUser_name (String user_name) {
 		String result="";
 		if (!stringSize(user_name,1,25))
-			result= "Your First Name must between 1 and 25 digits";
-		//else
-		//if (!SystemUserDAO.uniqueEmpID(uta_idError))
-			//result="SystemUser ID already in database";
-		else
-		if (!SystemUserDAO.uniqueUserName(user_name))
-			result="SystemUser ID already in database";		
+			result= "Your User Name must be between 1 and 25 characters long";
+		else if (SystemUserDAO.exsistUserName(user_name))
+			result="SystemUser already in database";		
 		
 		return result;
 	}
+	//user name should exist in DB
+	private String validateUser_nameINDB (String user_name) {
+		String result="";
+		if (!stringSize(user_name,1,25))
+			result= "Your User Name must be between 1 and 25 characters long";
+		else if (!SystemUserDAO.exsistUserName(user_name)){
+			result="User Name is not found in our database";		
+			System.out.println("validateUser_nameINDB: User Name is not found in DB - error");
+		}
+		return result;
+	}	
+	
 	private String validatePassword (String password) {
 		String result="";
 		if (!stringSize(password,1,25))
-			result= "Your password must between 1 and 25 digits";
+			result= "Your password must be between 1 and 25 characters long";
+		else if (!checkString(password)){
+			result="Your password must contain at least 1 uppercase, 1 lowercase and 1 digit";
+		}
 		return result;
 	}
+	
+	private static boolean checkString(String str) {
+	    char ch;
+	    boolean capitalFlag = false;
+	    boolean lowerCaseFlag = false;
+	    boolean numberFlag = false;
+	    for(int i=0;i < str.length();i++) {
+	        ch = str.charAt(i);
+	        if( Character.isDigit(ch)) {
+	            numberFlag = true;
+	        }
+	        else if (Character.isUpperCase(ch)) {
+	            capitalFlag = true;
+	        } else if (Character.isLowerCase(ch)) {
+	            lowerCaseFlag = true;
+	        }
+	        if(numberFlag && capitalFlag && lowerCaseFlag)
+	            return true;
+	    }
+	    return false;
+	}
+	
+	
 	private String validateName (String name) {
 		String result="";
 		if (!stringSize(name,1,23))
-			result= "Your Name must between 1 and 35 digits";
+			result= "Your Name must be between 1 and 35 characters long";
 		return result;
 	}
 	private String validatePhone (String phone) {
 		String result="";
 		if (!stringSize(phone,10,10))
-			result= "Your Phone Number must 10 digits";
+			result= "Your Phone Number must 10 digits long";
 		else {
 			if (!isTextAnInteger(phone))
 				result="Your Phone Number must be a number";
@@ -156,23 +204,35 @@ public class SystemUser implements Serializable {
 	}	
 	private String validateEmail (String email) {
 		String result="";
-		if (!stringSize(email,1,45))
-			result= "Your Name must between 3 and 45 digits";
+		if (!stringSize(email,7,45))
+			result= "Your email must be between 7 and 45 characters long";
+		else if (!(email.substring(email.length() - 4, email.length()).equals(".com") ||
+				email.substring(email.length() - 4, email.length()).equals(".gov") ||
+				email.substring(email.length() - 4, email.length()).equals(".org") ||
+				email.substring(email.length() - 4, email.length()).equals(".edu") ||
+				email.substring(email.length() - 4, email.length()).equals(".mil"))
+				) {
+			//result=email.substring(email.length() - 4, email.length())+(email.substring(email.length() - 4, email.length())).length();
+			result="Your email must end with .com, .gov, .org, .edu or .mil";
+		}
+		else if (!email.contains("@")) {
+			result="Your email must contain @.";
+		}
 		return result;
 	}	
 	private String validateAddress (String address) {
 		String result="";
 		if (!stringSize(address,1,65))
-			result= "Your Address must between 1 and 65 digits";
+			result= "Your Address must be between 1 and 65 characters long";
 		return result;
 	}
 	private String validateDob (String dob) {
 		String result="";
 		if (!stringSize(dob,8,8))
-			result= "Your Date of Birth must MMDDYYYY format";
+			result= "Your Date of Birth must be MMDDYYYY format";
 		else {
 			if (!isTextAnInteger(dob))
-				result="Your Date of Birth must be a number";
+				result="Your Date of Birth must be number";
 		}
 		return result;
 	}
