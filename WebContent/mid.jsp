@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel = "stylesheet" type="text/css" href = "/company_management/style.css" /><title>Renter HomePage</title>
+<link rel = "stylesheet" type="text/css" href = "<%=request.getContextPath() %>/style.css" /><title>Renter HomePage</title>
 </head>
 <body>
 <div id="wrapper">
@@ -25,7 +25,7 @@ We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM
 <br>
 We received your request to cancel your reservation <br>
 Thank you!<br><br>
-<a href="/company_management/ViewReservedController?action=listReserved">Would you like to view all your reserved rentals? </a> <br>
+<a href="<%=request.getContextPath() %>/ViewReservedController?action=listReserved">Would you like to view all your reserved rentals? </a> <br>
 
 
 </div>

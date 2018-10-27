@@ -1,6 +1,6 @@
 <%@ include file = "Header.jsp" %>
 
-<title>Manager HomePage</title>
+<title>Manager Edit My Profile Success</title>
 <div id="horizontalLinks">
 <a href="<%=request.getContextPath()%>/Manager.jsp">HomePage</a>
 <a href="<%=request.getContextPath()%>/ManagerController?action=editMyProfile">Edit My Profile</a>
@@ -10,15 +10,12 @@
 <div id="main">
 <% String userName = (String)request.getSession().getAttribute("sessionUser"); %> 
 <% String role = (String)request.getSession().getAttribute("sessionRole"); %>
-<h2>Welcome to <%=role%>'s HomePage, <%=userName%></h2>
-<a href="<%=request.getContextPath()%>/ManagerController?action=deleteReservation">delete a reservation</a>
+<h2><%=role%>, <%=userName%></h2>
+<h5>You successfully edited your own profile. </h5>
 
-<a href="<%=request.getContextPath()%>/ManagerController?action=viewCalendar">view all Rental records</a>
-
-<a href="<%=request.getContextPath()%>/ViewAvailableCar.jsp">view all available vehicles</a>
-
-<a href="<%=request.getContextPath()%>/NewCar.jsp">add a new vehicle</a>
+<a href="<%=request.getContextPath()%>/Manager.jsp">Back to your home page</a>
 
 </div>
 
+<br><br><br>
 <%@ include file = "Footer.jsp" %>

@@ -1,35 +1,23 @@
 <%@ include file = "Header.jsp" %>
-<style>
-table {
-    border-collapse: collapse;
-    width:500px;
- 	margin: 10px auto;
-}
 
-table, th, td {
-    border: 1px solid black;
-}
-</style>
-
-
-<title>Admin HomePage</title>
+<title>Admin Show All System Users Profile</title>
 <div id="horizontalLinks">
-<a href="/CampusRentACar/AdminController?action=showAllSystemUsersProfile">All System Users Profile</a>
-<a href="/CampusRentACar/AdminRevokeRenter.jsp">Revoke</a>
-<a href="/CampusRentACar/EditProfile.jsp">Edit My Profile</a>
-<a href="/CampusRentACar/Logout.jsp">Logout</a>
+<a href="<%=request.getContextPath()%>/Admin.jsp">HomePage</a>
+<a href="<%=request.getContextPath()%>/AdminController?action=showAllSystemUsersProfile">All System Users Profile</a>
+<a href="<%=request.getContextPath()%>/AdminRevokeRenter.jsp">Revoke</a>
+<a href="<%=request.getContextPath()%>/AdminController?action=editMyProfile">Edit My Profile</a>
+<a href="<%=request.getContextPath()%>/Logout">Logout</a>
 </div>
 
-<div id="main">
-<h2>Welcome to Admin Homepage</h2>
-<br>
-<p>
-Select a system user's profile you would like to edit, and click edit  
-<br>
 
-<br></p>
-<form name="Edit" action="/CampusRentACar/AdminController?action=edit" method="post" >
- <table> 
+<div id="main">
+<% String userName = (String)request.getSession().getAttribute("sessionUser"); %> 
+<% String role = (String)request.getSession().getAttribute("sessionRole"); %>
+<h2><%=role%>, <%=userName%></h2>
+<h4>Select a system user's profile you would like to edit, and click edit</h4>  
+<br>
+<form name="Edit" action="<%=request.getContextPath()%>/AdminController?action=edit" method="post" >
+ <table class="table1"> 
 <tr> 
 <th>Select a system user</th>
 <th>Role</th>
@@ -52,16 +40,11 @@ Select a system user's profile you would like to edit, and click edit
 </c:forEach>
  </table>
  
-<p>
-Select a system user's profile you would like to edit, and click   
+<p> 
 <input name="action" value="edit" type="hidden">
 <input name="editProfile" type="submit" value="edit">    
 </p>
 </form>
-
-<!-- <p> <input name="action" value="insertSystemUser" type="hidden"> 
-<input name="submit" type="submit" value="insertSystemUser"> </p> -->
-
 
 </div>
 

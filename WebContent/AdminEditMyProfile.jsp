@@ -1,12 +1,12 @@
 <%@ include file = "Header.jsp" %>
 
-<title>Admin Edit Any User's Profile</title>
+<title>Admin Edit My Profile</title>
 <div id="horizontalLinks">
 <a href="<%=request.getContextPath()%>/Admin.jsp">HomePage</a>
 <a href="<%=request.getContextPath()%>/AdminController?action=showAllSystemUsersProfile">All System Users Profile</a>
 <a href="<%=request.getContextPath()%>/AdminRevokeRenter.jsp">Revoke</a>
 <a href="<%=request.getContextPath()%>/AdminController?action=editMyProfile">Edit My Profile</a>
-<a href="<%=request.getContextPath()%>/Logout">Logout</a>
+<a href="<%=request.getContextPath()%>/Logout.jsp">Logout</a>
 </div>
 
 
@@ -14,7 +14,7 @@
 <% String userName = (String)request.getSession().getAttribute("sessionUser"); %> 
 <% String role = (String)request.getSession().getAttribute("sessionRole"); %>
 <h2><%=role%>, <%=userName%></h2>
-<h5>You may edit any user's profile, but user name nor role cannot be edited. </h5>
+<h5>You may edit your profile, but user name nor role cannot be edited. </h5>
 <form name="AdminController" action="<%=request.getContextPath()%>/AdminController?action=validateEditting" method="post" >
 <input class="error" name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" disabled="disabled"> 
  

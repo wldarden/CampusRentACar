@@ -21,7 +21,7 @@
 <td><input class="error" name="passwordError" value="<c:out value='${errorMsgs.passwordError}'/>"  disabled="disabled"> </td>
 </tr>
 
-<!------------ TO DO: pull down menu: add error and put back prev selected item  ---------> 
+<!------------ TO DO: pull down menu: add error and put back prev selected item 
 
 <tr>	
 <td> Role (*): </td>
@@ -32,6 +32,28 @@
 	<option value="Manager">Manager</option>
 </select>  
 </tr>
+ ---------> 
+<tr>	
+<td> Role (*): </td>
+<td><select name="role"> 
+<c:choose>
+<c:when test="${systemUser.role=='Manager'}">
+	<option value="User">User</option>
+	<option value="Admin">Admin</option>
+	<option value="Manager" selected>Manager</option>
+</c:when>
+<c:when test="${systemUser.role=='Admin'}">
+	<option value="User">User</option>
+	<option value="Admin" selected>Admin</option>
+	<option value="Manager">Manager</option>
+</c:when>
+<c:otherwise>
+	<option value="User" selected>User</option>
+	<option value="Admin">Admin</option>
+	<option value="Manager">Manager</option>
+</c:otherwise>
+</c:choose>	
+ </select> </td> </tr>
 
 <tr>	
 <td>Name (*):</td> 
@@ -65,13 +87,22 @@
 <td><input name="uta_id" value="<c:out value='${systemUser.uta_id}'/>" >
 <td><input class="error" name="uta_idError" value="<c:out value='${errorMsgs.uta_idError}'/>"  disabled="disabled"> </td>
 </tr>
+
 <tr> 	
 <td>Auto Club Membership:</td>
 <td><select name="auto_club_member"> 
-	<option value="no">No</option>
-	<option value="yes">Yes</option>
-	
+<c:choose>
+ <c:when test="${systemUser.auto_club_member==1}">
+ <option value="no">No</option>
+  <option value="yes" selected>Yes</option>
+ </c:when>
+ <c:otherwise>
+  <option value="no" selected>No</option>
+ <option value="yes">Yes</option>
+ </c:otherwise>
+</c:choose>	
 </select>  </td></tr>
+
  <tr>
  <td colspan="2">(*) Mandatory field</td>
  </tr>

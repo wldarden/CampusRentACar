@@ -1,51 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%> 
+<%@ include file = "Header.jsp" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel = "stylesheet" type="text/css" href = "/company_management/style.css" /><title>Renter HomePage</title>
-</head>
-<body>
-<div id="wrapper">
-<div id="header">
-<h1 id="h1Wrapper">Campus Rent A Car</h1>
-We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM-8PM, Sa 8AM-5PM, Su Noon-5PM.
-<hr><br><br>
+<title>Cancel</title>
+<div id="horizontalLinks">
+<a href="Updateownprofile.jsp">Update Profile|</a>
+<a href="Logout">Logout|</a>
+</div>
 
 
 <div id="main">
 <h2>Welcome to Renter's Homepage</h2>
-<br>
-<p>Please enter the rental_id you want cancel:<br>
-
-
+<form action="<%=request.getContextPath() %>/ViewReservedController?action=listCancel" method="post"> 
+<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 355px" disabled="disabled">
+<table>
 <tr>
-	<td>
-	<form action="/company_management/ViewReservedController?action=listCancel" method="post">
-	<table style="width: 300px; ">
+<td style="width: 364px; height: 46px">Please enter the rental_id you want cancel:</td>
+</tr>
+<tr>
 	<tr>
 	<tr>
   	<td> Rental_id: </td>
  	<td> <input name="id" value="<c:out value='${RentalModel.rental_id}'/>">  </td>
-  	</tr>
+ 	<td> <input name = "rental_idError" value = "<c:out value = '${errorMsgs.getRentalIDerror()}'/>" type="text" style="background-color: white; color: red; border: none; width: 392px" disabled = "disabled" maxlength="60"></td>      	
+</tr>
 
 </table>
   <input type="submit" value="Submit">
-	</form>      
-</td>
-</tr>
-</table>
-
-
-
-
-
-
-
-
-
+	      
 <br>
 <br>
 <a href="NewFile.jsp">|Back to welcome page|</a>
@@ -55,7 +35,6 @@ We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM
 University of Texas at Arlington <br>
 CSE 6329-001 Class Project, Fall 2018 <br>
 Team 3 <br>
-</div>
 </div>
 </body>
 </html>

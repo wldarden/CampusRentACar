@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel = "stylesheet" type="text/css" href = "/company_management/style.css" />
+<link rel = "stylesheet" type="text/css" href = "/CampusRentACar/style.css" />
 <title>Add a new vehicle into the system</title>
 </head>
 <body>
@@ -24,54 +24,59 @@ We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM
 
 <div id="main">
 <h2>input the information of the new vehicle</h2>
-<form name="AddNewCar" action="AddNewCar" method="post" >
+<form name="ManagerController" action="<%=request.getContextPath()%>/ManagerController?action=addNewCar" method="post" >
 
 <table>
 <tr>
 <td> Car ID (*): </td> 
 <td> <input name="Car_id" value="<c:out value='${car.userName}'/>" > </td>
-<td> <input name="userNameerror" value="<c:out value='${RerrorMsgs.User_name_error}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="userNameerror" value="<c:out value='${errorMsgs.getiderror()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>	
 <td> Car Name (*): </td>
 <td><input name="Car_name" value="<c:out value='${car.password}'/>" > </td>
-<td> <input name="passworderror" value="<c:out value='${RerrorMsgs.passwordError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+
 </tr>
 
 
 <tr>	
 <td>Capacity (*):</td> 
 <td><input name="Capacity" value="<c:out value='${car.name}'/>" ></td>
-<td> <input name="nameerror" value="<c:out value='${RerrorMsgs.NameError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="nameerror" value="<c:out value='${errorMsgs.getCapacityError() }'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr>	
 <td>weekday_rate (*):</td> 
 <td><input name="weekday_rate" value="<c:out value='${car.phone}'/>" ></td>
-<td> <input name="phoneerror" value="<c:out value='${RerrorMsgs.phoneError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="phoneerror" value="<c:out value='${errorMsgs.getWeekday_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 <tr>	
 <td>weekend_rate (*):</td> 
 <td><input name="weekend_rate" value="<c:out value='${car.phone}'/>" ></td>
-<td> <input name="or" value="<c:out value='${RerrorMsgs.phoneError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="or" value="<c:out value='${errorMsgs.getWeekend_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
+<tr>	
+<td>week_rate (*):</td> 
+<td><input name="week_rate" value="<c:out value='${car.phone}'/>" ></td>
+<td> <input name="or" value="<c:out value='${errorMsgs.getWeek_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+</tr>
 
 <tr>
 <td>gps_rate (*):</td> 
 <td><input name="gps" value="<c:out value='${car.email}'/>" ></td>
-<td> <input name="emailerror" value="<c:out value='${RerrorMsgs.emailError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="emailerror" value="<c:out value='${errorMsgs.getGPS_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
 <tr>	
 <td>on_star_rate (*):</td>
 <td><input name="on_star" value="<c:out value='${car.address}'/>" > </td> 
-<td> <input name="addresserror" value="<c:out value='${RerrorMsgs.AddressError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="addresserror" value="<c:out value='${errorMsgs.getOnstar_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 <tr> 	
 <td>sirius_xm_rate (*):</td>
 <td><input name="sirius_xm" value="<c:out value='${car.Date_of_birth}'/>" > </td> 
-<td> <input name="Doberror" value="<c:out value='${RerrorMsgs.DobError}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
+<td> <input name="Doberror" value="<c:out value='${errorMsgs.getSiriusXM_rateError()}'/>" type="text" style ="background-color: white; color: red; border: none; width: 300px" disabled="disabled" maxlength="60"> </td>
 </tr>
 
  <tr>
@@ -80,7 +85,7 @@ We offer car rental services to UTA students and faculties. Store Hours: M-F 8AM
 </table>
 <!-- <p> <input name="action" value="insertSystemUser" type="hidden"> 
 <input name="submit" type="submit" value="insertSystemUser"> </p> -->
- <p> <input name="action" value="insertSystemUser" type="hidden"> 
+ <p> <input name="action" value="addNewCar" type="hidden"> 
 <input name="submit" type="submit" value="Submit"> </p> 
 </form>
 </div>
