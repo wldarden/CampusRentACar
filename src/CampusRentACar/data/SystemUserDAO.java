@@ -67,17 +67,20 @@ public class SystemUserDAO {
 		return "error: role is not found";
 		}	
 
-/*uniqueUserName method does not work */
+/*uniqueUserName method called from SystemUser.java (register and revoke) */
 	
-	public static Boolean exsistUserName(String userName) {  
+	public static Boolean exsistUserName(String userName, String role) {  
 		Statement stmt = null;   
 		Connection conn = null;  
 		boolean exsistInDB = false;
 		try {   
 			conn = SQLConnection.getDBConnection();  
 			stmt = conn.createStatement();
-			String searchSystemUser = " SELECT * from user WHERE user_name = '"+userName+"' AND role = 'User'";
-			System.out.println("uniqueUserName from SystemUserDAO: user name is #" + userName + '#');
+			//String searchSystemUser = " SELECT * from user WHERE user_name = '"+userName+"' AND role = 'User'";
+			String searchSystemUser = " SELECT * from user WHERE user_name = '"+userName+"' AND role = '"+role+"'";
+			
+			System.out.println("uniqueUserName from SystemUserDAO: user name is #" + userName + "# role =" + role);
+			
 			ResultSet rs = stmt.executeQuery(searchSystemUser);
 
 			int count = 0;
