@@ -97,7 +97,7 @@ public class SystemUser implements Serializable {
 	}
 	public void validateSystemUser (SystemUser systemUser, SystemUserErrorMsgs errorMsgs) {
 		errorMsgs.setUta_idError(validateUta_id(systemUser.getUta_id()));
-		errorMsgs.setUser_nameError(validateUser_name(systemUser.getUser_name()));
+		errorMsgs.setUser_nameError(validateUser_name(systemUser.getUser_name(), systemUser.getRole()));
 		errorMsgs.setPasswordError(validatePassword(systemUser.getPassword()));
 		errorMsgs.setNameError(validateName(systemUser.getName()));
 		errorMsgs.setPhoneError(validatePhone(systemUser.getPhone()));
@@ -119,8 +119,9 @@ public class SystemUser implements Serializable {
 		errorMsgs.setEditErrorMsg();			
 	}
 	
+	//user_name should exist in DB - revoke a user 
 	public void validateUserNameInSystemUser (SystemUser systemUser, SystemUserErrorMsgs errorMsgs) {
-		errorMsgs.setUser_nameError(validateUser_nameINDB(systemUser.getUser_name()));
+		errorMsgs.setUser_nameError(validateUser_nameINDB(systemUser.getUser_name(), systemUser.getRole()));
 		errorMsgs.setNotInDBErrorMsg();
 	}
 	private String validateUta_id (String uta_id) {
@@ -132,22 +133,22 @@ public class SystemUser implements Serializable {
 		}
 		return result;				
 	}
-	//user name should not exist in DB
-	private String validateUser_name (String user_name) {
+	//user name should not exist in DB -  register function
+	private String validateUser_name (String user_name, String role) {
 		String result="";
 		if (!stringSize(user_name,1,25))
 			result= "Your User Name must be between 1 and 25 characters long";
-		else if (SystemUserDAO.exsistUserName(user_name))
+		else if (SystemUserDAO.exsistUserName(user_name, role))
 			result="SystemUser already in database";		
 		
 		return result;
 	}
-	//user name should exist in DB
-	private String validateUser_nameINDB (String user_name) {
+	//user name should exist in DB - revoke a renter function
+	private String validateUser_nameINDB (String user_name, String role) {
 		String result="";
 		if (!stringSize(user_name,1,25))
 			result= "Your User Name must be between 1 and 25 characters long";
-		else if (!SystemUserDAO.exsistUserName(user_name)){
+		else if (!SystemUserDAO.exsistUserName(user_name, role)){
 			result="User Name is not found in our database";		
 			System.out.println("validateUser_nameINDB: User Name is not found in DB - error");
 		}
@@ -156,27 +157,28 @@ public class SystemUser implements Serializable {
 	
 	private String validatePassword (String password) {
 		String result="";
-		if (!stringSize(password,1,25))
-			result= "Your password must be between 1 and 25 characters long";
+		if (!stringSize(password,3,25))  //changed from 1<=size<=25
+			result= "Your password must be between 3 and 25 characters long";
 		else if (!checkString(password)){
-			result="Your password must contain at least 1 uppercase, 1 lowercase and 1 digit";
+			result="Your password must contain at least 1 uppercase 1 lowercase and 1 digit";
 		}
 		return result;
 	}
 	
-	private static boolean checkString(String str) {
+	private static boolean checkString(String string) {
 	    char ch;
 	    boolean capitalFlag = false;
 	    boolean lowerCaseFlag = false;
 	    boolean numberFlag = false;
-	    for(int i=0;i < str.length();i++) {
-	        ch = str.charAt(i);
+	    for(int i=0; i < string.length(); i++) {
+	        ch = string.charAt(i);
 	        if( Character.isDigit(ch)) {
 	            numberFlag = true;
 	        }
 	        else if (Character.isUpperCase(ch)) {
 	            capitalFlag = true;
-	        } else if (Character.isLowerCase(ch)) {
+	        } 
+	        else if (Character.isLowerCase(ch)) {
 	            lowerCaseFlag = true;
 	        }
 	        if(numberFlag && capitalFlag && lowerCaseFlag)
@@ -188,7 +190,7 @@ public class SystemUser implements Serializable {
 	
 	private String validateName (String name) {
 		String result="";
-		if (!stringSize(name,1,23))
+		if (!stringSize(name,1,35))
 			result= "Your Name must be between 1 and 35 characters long";
 		return result;
 	}
@@ -213,7 +215,7 @@ public class SystemUser implements Serializable {
 				email.substring(email.length() - 4, email.length()).equals(".mil"))
 				) {
 			//result=email.substring(email.length() - 4, email.length())+(email.substring(email.length() - 4, email.length())).length();
-			result="Your email must end with .com, .gov, .org, .edu or .mil";
+			result="Your email must end with .com .gov .org .edu or .mil";
 		}
 		else if (!email.contains("@")) {
 			result="Your email must contain @.";
@@ -241,13 +243,11 @@ public class SystemUser implements Serializable {
 	}
 	private boolean isTextAnInteger (String string) {
         boolean result;
-		try
-        {
+		try {
             Long.parseLong(string);
             result=true;
         } 
-        catch (NumberFormatException e) 
-        {
+        catch (NumberFormatException e) {
             result=false;
         }
 		return result;

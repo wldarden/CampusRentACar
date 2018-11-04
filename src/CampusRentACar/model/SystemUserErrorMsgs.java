@@ -5,7 +5,6 @@ public class SystemUserErrorMsgs {
 	private String errorMsg;
 
 	private String uta_idError;
-    private String roleError;
     private String user_nameError;
     private String passwordError;
     private String nameError;
@@ -17,7 +16,6 @@ public class SystemUserErrorMsgs {
 	public SystemUserErrorMsgs () {
 		this.errorMsg="";
 		this.uta_idError="";
-		this.roleError="";
 		this.user_nameError="";
 		this.passwordError="";
 		this.nameError="";
@@ -32,7 +30,7 @@ public class SystemUserErrorMsgs {
 		return errorMsg;
 	}
 	public void setErrorMsg() {
-		if (!uta_idError.equals("") || !roleError.equals("") || !user_nameError.equals("") || !passwordError.equals("") ||
+		if (!uta_idError.equals("") || !user_nameError.equals("") || !passwordError.equals("") ||
 			!nameError.equals("") || !phoneError.equals("") || !emailError.equals("") || !addressError.equals("") ||
 			!dobError.equals(""))
 			errorMsg="Please correct the following errors";
@@ -56,12 +54,6 @@ public class SystemUserErrorMsgs {
 	}
 	public void setUta_idError(String uta_idError) {
 		this.uta_idError = uta_idError;
-	}
-	public String getRoleError() {
-		return roleError;
-	}
-	public void setRoleError(String roleError) {
-		this.roleError = roleError;
 	}
 
 	public String getUser_nameError() {
