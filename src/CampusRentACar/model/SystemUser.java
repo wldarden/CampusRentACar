@@ -21,17 +21,16 @@ public class SystemUser implements Serializable {
     
 	public void setSystemUser (String uta_id, String role,String user_name, String password, String name, String phone,String email,
 							String address, int auto_club_member, String dob) {
-		
-		this.uta_id = uta_id;
-		this.role = role;
-		this.user_name = user_name;
-		this.password = password;
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.address = address;
-		this.auto_club_member = auto_club_member;
-		this.dob = dob;
+		setUta_id(uta_id);
+		setRole(role);
+		setUser_name(user_name);
+		setPassword(password);
+		setName(name);
+		setPhone(phone);
+		setEmail(email);
+		setAddress(address);
+		setAuto_club_member(auto_club_member);
+		setDob(dob);
 	}    
        
     public String getUta_id() {
